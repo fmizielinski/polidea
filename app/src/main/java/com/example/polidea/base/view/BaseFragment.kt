@@ -8,8 +8,6 @@ import timber.log.Timber
 
 abstract class BaseFragment<V : BaseViewing, P : BasePresenter<V>> : Fragment() {
 
-    abstract fun providePresenter(): P
-
     //region lifecycle
 
     override fun onResume() {
@@ -25,6 +23,8 @@ abstract class BaseFragment<V : BaseViewing, P : BasePresenter<V>> : Fragment() 
     //endregion lifecycle
 
     //region presenter
+
+    abstract fun providePresenter(): P
 
     private fun bindPresenter() {
         Timber.d("bindPresenter")

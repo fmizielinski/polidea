@@ -7,8 +7,6 @@ import timber.log.Timber
 
 abstract class BaseActivity<V : BaseViewing, P : BasePresenter<V>> : AppCompatActivity() {
 
-    abstract fun providePresenter(): P
-
     //region lifecycle
 
     override fun onResume() {
@@ -24,6 +22,8 @@ abstract class BaseActivity<V : BaseViewing, P : BasePresenter<V>> : AppCompatAc
     //endregion lifecycle
 
     //region presenter
+
+    abstract fun providePresenter(): P
 
     private fun bindPresenter() {
         Timber.d("bindPresenter")
