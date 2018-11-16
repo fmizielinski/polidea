@@ -2,7 +2,7 @@
     <string name="app_name">polidea</string>
 
     <plurals name="question_answer">
-        <item quantity="one">answer</item>
-        <item quantity="other">answers</item>
+        <item quantity="one">%d answer</item>
+        <item quantity="other">%d answers</item>
     </plurals>
 </resources>

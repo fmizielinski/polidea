@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.polidea.R
 import com.example.polidea.base.view.BaseFragment
 import com.example.polidea.domain.dto.QuestionDto
+import com.example.polidea.view.main.search.adapter.QuestionAdapter
 import com.example.polidea.view.main.search.presenter.SearchPresenter
 import com.example.polidea.view.main.search.presenter.SearchViewing
+import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchViewing {
@@ -31,6 +34,10 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 	//region viewing
 
 	override fun displayQuestions(questions: List<QuestionDto>) {
+		val layoutManager = LinearLayoutManager(context)
+		val adapter = QuestionAdapter(questions)
+		recyclerSearch.layoutManager = layoutManager
+		recyclerSearch.adapter = adapter
 	}
 
 	//endregion viewing
