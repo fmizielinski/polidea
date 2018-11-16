@@ -29,6 +29,11 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 	): View? =
 		inflater.inflate(R.layout.fragment_search, container, false)
 
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+		searchBarSearch.setOnSearchQueryChangedListener(presenter::search)
+	}
+
 	//endregion lifecycle
 
 	//region viewing
