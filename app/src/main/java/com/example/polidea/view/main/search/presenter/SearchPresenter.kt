@@ -8,14 +8,15 @@ import timber.log.Timber
 
 class SearchPresenter(private val searchUseCase: SearchUseCase) : BasePresenter<SearchViewing>() {
 
+	private var questions: List<QuestionDto> = emptyList()
+	private var query: String = ""
+
 	//region lifecycle
 
-	override fun onFirstBind() {
-		search("android")
-	}
+	override fun onFirstBind() {}
 
 	override fun onViewRestoreState() {
-		search("android")
+		present { it.displayQuestions(questions) }
 	}
 
 	//endregion lifecycle
@@ -23,6 +24,9 @@ class SearchPresenter(private val searchUseCase: SearchUseCase) : BasePresenter<
 	//region search
 
 	fun search(query: String) {
+		if (this.query == query)
+			return
+		this.query = query
 		searchUseCase.execute(query)
 			.subscribe(::searchSuccess, Timber::e)
 			.addTo(compositeDisposable)
@@ -30,6 +34,7 @@ class SearchPresenter(private val searchUseCase: SearchUseCase) : BasePresenter<
 
 	private fun searchSuccess(questions: List<QuestionDto>) {
 		Timber.d("searchSuccess")
+		this.questions = questions
 		present { it.displayQuestions(questions) }
 	}
 
