@@ -1,10 +1,19 @@
 <resources>
     <string name="app_name">polidea</string>
 
+    <!-- region question -->
+
     <plurals name="question_answer">
-        <item quantity="one">%d answer</item>
-        <item quantity="other">%d answers</item>
+        <item quantity="one">answer</item>
+        <item quantity="other">answers</item>
     </plurals>
+    <string name="question_asked_by">asked by</string>
+
+    <!-- endregion question -->
+
+    <!-- region search bar -->
 
     <string name="search_bar_search">Search</string>
+
+    <!-- endregion search bar -->
 </resources>

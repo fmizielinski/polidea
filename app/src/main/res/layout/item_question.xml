@@ -4,29 +4,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="4dp"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layoutQuestionAnswer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.1"
+        tools:background="@drawable/background_answer_count_answered">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textQuestionAnswersCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageQuestion"
+            tools:text="3" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textQuestionAnswers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageQuestion"
+            tools:text="answers" />
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textQuestionTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageQuestion"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/layoutQuestionAnswer"
+        app:layout_constraintTop_toTopOf="@+id/layoutQuestionAnswer"
+        app:layout_constraintVertical_chainStyle="packed"
         tools:text="Title" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textQuestionAskedBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/question_asked_by"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/layoutQuestionAnswer"
+        app:layout_constraintStart_toEndOf="@+id/layoutQuestionAnswer"
+        app:layout_constraintTop_toBottomOf="@+id/textQuestionTitle" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textQuestionTitle"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textQuestionAskedBy"
+        app:layout_constraintStart_toEndOf="@+id/textQuestionAskedBy"
+        app:layout_constraintTop_toTopOf="@+id/textQuestionAskedBy"
         app:srcCompat="@drawable/ic_person_24px" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -34,20 +84,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageQuestion"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textQuestionAskedBy"
         app:layout_constraintStart_toEndOf="@+id/imageQuestion"
-        app:layout_constraintTop_toTopOf="@+id/imageQuestion"
         tools:text="Name" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textQuestionAnswers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageQuestion"
-        tools:text="3 answers" />
 </androidx.constraintlayout.widget.ConstraintLayout>

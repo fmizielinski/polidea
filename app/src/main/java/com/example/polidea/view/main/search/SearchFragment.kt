@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.polidea.R
 import com.example.polidea.base.view.BaseFragment
@@ -31,17 +32,29 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		searchBarSearch.setOnSearchQueryChangedListener(presenter::search)
+		setUpRecycler()
+		setUpSearchBar()
 	}
 
 	//endregion lifecycle
 
+	//region setup
+
+	private fun setUpRecycler() {
+		val layoutManager = LinearLayoutManager(context)
+		recyclerSearch.layoutManager = layoutManager
+	}
+
+	private fun setUpSearchBar() {
+		searchBarSearch.setOnSearchQueryChangedListener(presenter::search)
+	}
+
+	//endregion setup
+
 	//region viewing
 
 	override fun displayQuestions(questions: List<QuestionDto>) {
-		val layoutManager = LinearLayoutManager(context)
 		val adapter = QuestionAdapter(questions)
-		recyclerSearch.layoutManager = layoutManager
 		recyclerSearch.adapter = adapter
 	}
 

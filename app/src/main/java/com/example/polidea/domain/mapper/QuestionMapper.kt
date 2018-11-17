@@ -9,9 +9,10 @@ class QuestionMapper {
 		QuestionDto(
 			question.title,
 			question.answerCount,
+			question.isAnswered,
 			question.owner.displayName
 		)
 
 	fun map(questions: List<Question>): List<QuestionDto> =
-			questions.map(::map)
+		questions.map(::map)
 }
