@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.polidea.R
 import com.example.polidea.base.view.BaseFragment
@@ -42,6 +43,11 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 
 	private fun setUpRecycler() {
 		val layoutManager = LinearLayoutManager(context)
+		val adapter = QuestionAdapter()
+		adapter.onItemSelectedListener
+			.subscribe(::openDetails)
+
+		recyclerSearch.adapter = adapter
 		recyclerSearch.layoutManager = layoutManager
 	}
 
@@ -58,11 +64,15 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 	//region viewing
 
 	override fun displayQuestions(questions: List<QuestionDto>) {
-		val adapter = QuestionAdapter(questions)
-		recyclerSearch.adapter = adapter
+		(recyclerSearch.adapter as? QuestionAdapter)?.items = questions
 		swipeLayoutSearch.isRefreshing = false
 	}
 
 	//endregion viewing
+
+	private fun openDetails(url: String) {
+		val action = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(url)
+		findNavController().navigate(action)
+	}
 
 }

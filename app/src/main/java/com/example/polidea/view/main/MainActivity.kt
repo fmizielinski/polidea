@@ -9,10 +9,9 @@ import com.example.polidea.base.view.BaseActivity
 import com.example.polidea.view.main.presenter.MainPresenter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity<BaseViewing, MainPresenter>() {
+class MainActivity : BaseActivity<BaseViewing, MainPresenter>(), BaseViewing {
 
 	private val presenter: MainPresenter by viewModel()
-
 
 	override fun providePresenter() = presenter
 

@@ -5,9 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.polidea.R
 import com.example.polidea.domain.dto.QuestionDto
+import io.reactivex.subjects.PublishSubject
 
-class QuestionAdapter(private val items: List<QuestionDto>) :
-	RecyclerView.Adapter<QuestionViewHolder>() {
+class QuestionAdapter : RecyclerView.Adapter<QuestionViewHolder>() {
+
+	var items: List<QuestionDto> = emptyList()
+		set(value) {
+			field = value
+			notifyDataSetChanged()
+		}
+
+	val onItemSelectedListener: PublishSubject<String> = PublishSubject.create()
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
 		val inflater = LayoutInflater.from(parent.context)
@@ -20,5 +28,6 @@ class QuestionAdapter(private val items: List<QuestionDto>) :
 	override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
 		val item = items[position]
 		holder.bind(item)
+		holder.itemView.setOnClickListener { onItemSelectedListener.onNext(item.link) }
 	}
 }

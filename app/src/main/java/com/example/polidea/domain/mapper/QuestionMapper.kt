@@ -11,7 +11,8 @@ class QuestionMapper {
 			question.answerCount,
 			question.isAnswered,
 			question.owner.displayName,
-			question.owner.profileImageUrl
+			question.owner.profileImageUrl,
+			question.link
 		)
 
 	fun map(questions: List<Question>): List<QuestionDto> =
