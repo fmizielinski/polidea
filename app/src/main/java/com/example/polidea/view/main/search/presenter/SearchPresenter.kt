@@ -23,8 +23,8 @@ class SearchPresenter(private val searchUseCase: SearchUseCase) : BasePresenter<
 
 	//region search
 
-	fun search(query: String) {
-		if (this.query == query)
+	fun search(query: String = this.query, refresh: Boolean = false) {
+		if (this.query == query && !refresh)
 			return
 		this.query = query
 		searchUseCase.execute(query)

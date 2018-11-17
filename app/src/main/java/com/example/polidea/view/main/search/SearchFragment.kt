@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.polidea.R
 import com.example.polidea.base.view.BaseFragment
@@ -34,6 +33,7 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 		super.onViewCreated(view, savedInstanceState)
 		setUpRecycler()
 		setUpSearchBar()
+		setUpRefresh()
 	}
 
 	//endregion lifecycle
@@ -46,7 +46,11 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 	}
 
 	private fun setUpSearchBar() {
-		searchBarSearch.setOnSearchQueryChangedListener(presenter::search)
+		searchBarSearch.setOnSearchQueryChangedListener { presenter.search(it) }
+	}
+
+	private fun setUpRefresh() {
+		swipeLayoutSearch.setOnRefreshListener { presenter.search(refresh = true) }
 	}
 
 	//endregion setup
@@ -56,6 +60,7 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 	override fun displayQuestions(questions: List<QuestionDto>) {
 		val adapter = QuestionAdapter(questions)
 		recyclerSearch.adapter = adapter
+		swipeLayoutSearch.isRefreshing = false
 	}
 
 	//endregion viewing
