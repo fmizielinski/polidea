@@ -7,7 +7,7 @@
         <item quantity="one">answer</item>
         <item quantity="other">answers</item>
     </plurals>
-    <string name="question_asked_by">asked by</string>
+    <string name="question_asked_by">asked by %s</string>
 
     <!-- endregion question -->
 

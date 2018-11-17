@@ -10,7 +10,8 @@ class QuestionMapper {
 			question.title,
 			question.answerCount,
 			question.isAnswered,
-			question.owner.displayName
+			question.owner.displayName,
+			question.owner.profileImageUrl
 		)
 
 	fun map(questions: List<Question>): List<QuestionDto> =

@@ -58,34 +58,24 @@
         tools:text="Title" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textQuestionAskedBy"
+        android:id="@+id/textQuestionOwner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/question_asked_by"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/layoutQuestionAnswer"
-        app:layout_constraintStart_toEndOf="@+id/layoutQuestionAnswer"
+        app:layout_constraintEnd_toStartOf="@+id/imageQuestion"
         app:layout_constraintTop_toBottomOf="@+id/textQuestionTitle" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textQuestionAskedBy"
-        app:layout_constraintStart_toEndOf="@+id/textQuestionAskedBy"
-        app:layout_constraintTop_toTopOf="@+id/textQuestionAskedBy"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textQuestionOwner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textQuestionOwner"
         app:srcCompat="@drawable/ic_person_24px" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textQuestionOwner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textQuestionAskedBy"
-        app:layout_constraintStart_toEndOf="@+id/imageQuestion"
-        tools:text="Name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
