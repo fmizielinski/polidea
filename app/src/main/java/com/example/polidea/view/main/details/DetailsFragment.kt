@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.example.polidea.R
 import com.example.polidea.base.domain.viewing.BaseViewing
 import com.example.polidea.base.view.BaseFragment
+import com.example.polidea.common.WebClient
 import com.example.polidea.view.main.details.presenter.DetailsPresenter
 import kotlinx.android.synthetic.main.fragment_details.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,11 +29,27 @@ class DetailsFragment : BaseFragment<BaseViewing, DetailsPresenter>(), BaseViewi
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-
-		val url = DetailsFragmentArgs.fromBundle(arguments).url
-		webViewDetails.loadUrl(url)
+		setUpWebView()
 	}
 
 	//endregion lifecycle
+
+	//region setup
+
+	private fun setUpWebView() {
+		val client = WebClient()
+		client.setOnProgressChangedListener {
+			if (it == 100)
+				progressDetails.visibility = View.GONE
+			progressDetails.progress = it
+		}
+
+		val url = DetailsFragmentArgs.fromBundle(arguments).url
+
+		webViewDetails.webChromeClient = client
+		webViewDetails.loadUrl(url)
+	}
+
+	//endregion setup
 
 }
