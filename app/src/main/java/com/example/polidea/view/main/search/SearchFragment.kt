@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.polidea.R
 import com.example.polidea.base.view.BaseFragment
@@ -63,8 +64,9 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 
 	//region viewing
 
-	override fun displayQuestions(questions: List<QuestionDto>) {
-		(recyclerSearch.adapter as? QuestionAdapter)?.items = questions
+	override fun displayQuestions(questions: PagedList<QuestionDto>) {
+//		(recyclerSearch.adapter as? QuestionAdapter)?.items = questions
+		(recyclerSearch.adapter as? QuestionAdapter)?.submitList(questions)
 		swipeLayoutSearch.isRefreshing = false
 	}
 

@@ -7,7 +7,7 @@ import io.reactivex.Single
 
 class SearchUseCase(private val dataSource: ApiDataSource) {
 
-	fun execute(query: String): Single<List<QuestionDto>> =
-		dataSource.search(query)
+	fun execute(page: Int, pageSize: Int, query: String): Single<List<QuestionDto>> =
+		dataSource.search(page, pageSize, query)
 			.runAsyncReturnOnMain()
 }

@@ -1,6 +1,9 @@
 package com.example.polidea.view.main.search.presenter
 
+import androidx.paging.PagedList
+import androidx.paging.RxPagedListBuilder
 import com.example.polidea.base.domain.presenter.BasePresenter
+import com.example.polidea.common.runAsyncReturnOnMain
 import com.example.polidea.domain.dto.QuestionDto
 import com.example.polidea.domain.usecase.SearchUseCase
 import io.reactivex.rxkotlin.addTo
@@ -8,15 +11,29 @@ import timber.log.Timber
 
 class SearchPresenter(private val searchUseCase: SearchUseCase) : BasePresenter<SearchViewing>() {
 
-	private var questions: List<QuestionDto> = emptyList()
+	private var questions: PagedList<QuestionDto>? = null
 	private var query: String = ""
+
+	private lateinit var dataSourceFactory: SearchDataSourceFactory
 
 	//region lifecycle
 
-	override fun onFirstBind() {}
+	override fun onFirstBind() {
+		dataSourceFactory = SearchDataSourceFactory(searchUseCase, compositeDisposable)
+		val config = PagedList.Config.Builder()
+			.setPageSize(30)
+			.setEnablePlaceholders(false)
+			.build()
+		RxPagedListBuilder<Int, QuestionDto>(dataSourceFactory, 30)
+			.buildObservable()
+			.runAsyncReturnOnMain()
+			.subscribe(::searchSuccess, Timber::e)
+			.addTo(compositeDisposable)
+	}
 
 	override fun onViewRestoreState() {
-		present { it.displayQuestions(questions) }
+		if (questions != null)
+			present { it.displayQuestions(questions!!) }
 	}
 
 	//endregion lifecycle
@@ -27,12 +44,13 @@ class SearchPresenter(private val searchUseCase: SearchUseCase) : BasePresenter<
 		if (this.query == query && !refresh)
 			return
 		this.query = query
-		searchUseCase.execute(query)
-			.subscribe(::searchSuccess, Timber::e)
-			.addTo(compositeDisposable)
+//		searchUseCase.execute(query)
+//			.subscribe(::searchSuccess, Timber::e)
+//			.addTo(compositeDisposable)
+		dataSourceFactory.search(query)
 	}
 
-	private fun searchSuccess(questions: List<QuestionDto>) {
+	private fun searchSuccess(questions: PagedList<QuestionDto>) {
 		Timber.d("searchSuccess")
 		this.questions = questions
 		present { it.displayQuestions(questions) }

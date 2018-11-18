@@ -8,13 +8,13 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-	@GET("/2.2/search?site=stackoverflow")
+	@GET("/2.2/search?site=stackoverflow&order=desc&sort=activity")
 	@Headers(
 		"Accept: application/json; charset=utf-8"
 	)
 	fun search(
-		@Query("order") order: String = "desc",
-		@Query("sort") sort: String = "activity",
+		@Query("page") page: Int,
+		@Query("pagesize") pageSize: Int,
 		@Query("intitle") query: String
 	): Single<SearchResponse>
 }

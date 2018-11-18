@@ -10,7 +10,7 @@ class ApiDataSourceImpl(
 	private val questionMapper: QuestionMapper
 ) : ApiDataSource {
 
-	override fun search(query: String): Single<List<QuestionDto>> =
-		apiService.search(query = query)
+	override fun search(page: Int, pageSize: Int, query: String): Single<List<QuestionDto>> =
+		apiService.search(page, pageSize, query)
 			.map { questionMapper.map(it.items) }
 }

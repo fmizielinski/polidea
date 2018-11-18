@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface ApiDataSource {
 
-	fun search(query: String): Single<List<QuestionDto>>
+	fun search(page: Int, pageSize: Int, query: String): Single<List<QuestionDto>>
 }

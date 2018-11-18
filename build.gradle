@@ -6,6 +6,7 @@ buildscript {
         koinVersion = '1.0.2'
         retrofitVersion = '2.4.0'
         navVersion = '1.0.0-alpha07'
+        pagingVersion = '2.1.0-beta01'
     }
     repositories {
         google()

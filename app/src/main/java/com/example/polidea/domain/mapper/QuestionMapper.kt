@@ -7,6 +7,7 @@ class QuestionMapper {
 
 	private fun map(question: Question) =
 		QuestionDto(
+			question.id,
 			question.title,
 			question.answerCount,
 			question.isAnswered,
