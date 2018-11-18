@@ -9,4 +9,8 @@ interface SearchViewing : BaseViewing {
 	fun displayQuestions(questions: PagedList<QuestionDto>)
 
 	fun displayError()
+
+	fun displayProgress()
+
+	fun hideProgress()
 }

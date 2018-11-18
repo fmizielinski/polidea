@@ -82,6 +82,14 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 		recyclerSearch.visibility = View.GONE
 	}
 
+	override fun displayProgress() {
+		progressSearch.show()
+	}
+
+	override fun hideProgress() {
+		progressSearch.hide()
+	}
+
 	//endregion viewing
 
 	private fun openDetails(url: String) {

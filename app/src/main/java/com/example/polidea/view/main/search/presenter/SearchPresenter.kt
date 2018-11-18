@@ -19,7 +19,8 @@ class SearchPresenter(private val searchUseCase: SearchUseCase) : BasePresenter<
 	//region lifecycle
 
 	override fun onFirstBind() {
-		dataSourceFactory = SearchDataSourceFactory(searchUseCase, compositeDisposable, ::searchError)
+		dataSourceFactory =
+				SearchDataSourceFactory(searchUseCase, compositeDisposable, ::searchError)
 		RxPagedListBuilder<Int, QuestionDto>(dataSourceFactory, 30)
 			.buildObservable()
 			.runAsyncReturnOnMain()
@@ -39,6 +40,7 @@ class SearchPresenter(private val searchUseCase: SearchUseCase) : BasePresenter<
 	fun search(query: String = this.query, refresh: Boolean = false) {
 		if (this.query == query && !refresh)
 			return
+		present(SearchViewing::displayProgress)
 		this.query = query
 		dataSourceFactory.search(query)
 	}
@@ -46,11 +48,17 @@ class SearchPresenter(private val searchUseCase: SearchUseCase) : BasePresenter<
 	private fun searchSuccess(questions: PagedList<QuestionDto>) {
 		Timber.d("searchSuccess")
 		this.questions = questions
-		present { it.displayQuestions(questions) }
+		present {
+			it.displayQuestions(questions)
+			it.hideProgress()
+		}
 	}
 
 	private fun searchError() {
-		present(SearchViewing::displayError)
+		present {
+			it.displayError()
+			it.hideProgress()
+		}
 	}
 
 	//endregion search
