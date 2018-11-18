@@ -7,7 +7,8 @@ import io.reactivex.disposables.CompositeDisposable
 
 class SearchDataSourceFactory(
 	private val searchUseCase: SearchUseCase,
-	private val compositeDisposable: CompositeDisposable
+	private val compositeDisposable: CompositeDisposable,
+	private val onErrorListener: () -> Unit
 ) : DataSource.Factory<Int, QuestionDto>() {
 
 	private var query: String = ""
@@ -15,7 +16,7 @@ class SearchDataSourceFactory(
 	private var dataSource: SearchDataSource? = null
 
 	override fun create(): DataSource<Int, QuestionDto> {
-		dataSource = SearchDataSource(searchUseCase, compositeDisposable, query)
+		dataSource = SearchDataSource(searchUseCase, compositeDisposable, query, onErrorListener)
 		return dataSource!!
 	}
 

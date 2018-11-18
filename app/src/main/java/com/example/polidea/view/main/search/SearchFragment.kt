@@ -36,6 +36,7 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 		setUpRecycler()
 		setUpSearchBar()
 		setUpRefresh()
+		setUpError()
 	}
 
 	//endregion lifecycle
@@ -60,14 +61,25 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 		swipeLayoutSearch.setOnRefreshListener { presenter.search(refresh = true) }
 	}
 
+	private fun setUpError() {
+		imageSearch.setOnClickListener { presenter.search(refresh = true) }
+		textSearch.setOnClickListener { presenter.search(refresh = true) }
+	}
+
 	//endregion setup
 
 	//region viewing
 
 	override fun displayQuestions(questions: PagedList<QuestionDto>) {
-//		(recyclerSearch.adapter as? QuestionAdapter)?.items = questions
+		groupSearch.visibility = View.GONE
+		recyclerSearch.visibility = View.VISIBLE
 		(recyclerSearch.adapter as? QuestionAdapter)?.submitList(questions)
 		swipeLayoutSearch.isRefreshing = false
+	}
+
+	override fun displayError() {
+		groupSearch.visibility = View.VISIBLE
+		recyclerSearch.visibility = View.GONE
 	}
 
 	//endregion viewing

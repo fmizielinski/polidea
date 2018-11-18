@@ -10,7 +10,8 @@ import timber.log.Timber
 class SearchDataSource(
 	private val searchUseCase: SearchUseCase,
 	private val compositeDisposable: CompositeDisposable,
-	private var query: String
+	private var query: String,
+	private val onErrorListener: () -> Unit
 ) :
 	PageKeyedDataSource<Int, QuestionDto>() {
 
@@ -28,7 +29,10 @@ class SearchDataSource(
 		searchUseCase.execute(1, params.requestedLoadSize, query)
 			.subscribe({
 				callback.onResult(it, 1, 2)
-			}, Timber::e)
+			}, {
+				Timber.e(it)
+				onErrorListener.invoke()
+			})
 			.addTo(compositeDisposable)
 	}
 
@@ -38,7 +42,10 @@ class SearchDataSource(
 		searchUseCase.execute(params.key, params.requestedLoadSize, query)
 			.subscribe({
 				callback.onResult(it, params.key + 1)
-			}, Timber::e)
+			}, {
+				Timber.e(it)
+				onErrorListener.invoke()
+			})
 			.addTo(compositeDisposable)
 
 	}

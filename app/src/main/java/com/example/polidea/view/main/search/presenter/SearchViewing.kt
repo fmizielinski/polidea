@@ -7,4 +7,6 @@ import com.example.polidea.domain.dto.QuestionDto
 interface SearchViewing : BaseViewing {
 
 	fun displayQuestions(questions: PagedList<QuestionDto>)
+
+	fun displayError()
 }

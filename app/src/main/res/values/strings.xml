@@ -16,4 +16,10 @@
     <string name="search_bar_search">Search</string>
 
     <!-- endregion search bar -->
+
+    <!-- region search screen -->
+
+    <string name="search_error"> Oops… Something went wrong\nTap to retry</string>
+
+    <!-- endregion search screen -->
 </resources>
