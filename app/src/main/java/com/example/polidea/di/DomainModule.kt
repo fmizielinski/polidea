@@ -1,5 +1,7 @@
 package com.example.polidea.di
 
+import com.example.polidea.domain.usecase.GetOrderValuesUseCase
+import com.example.polidea.domain.usecase.GetSortValuesUseCase
 import com.example.polidea.domain.usecase.SearchUseCase
 import com.example.polidea.view.main.details.presenter.DetailsPresenter
 import com.example.polidea.view.main.presenter.MainPresenter
@@ -11,6 +13,8 @@ object DomainModule {
 	val module = module {
 
 		factory<SearchUseCase>()
+		factory<GetOrderValuesUseCase>()
+		factory<GetSortValuesUseCase>()
 
 		factory<SearchPresenter>()
 		factory<DetailsPresenter>()

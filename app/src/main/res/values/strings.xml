@@ -22,4 +22,11 @@
     <string name="search_error"> Oops… Something went wrong\nTap to retry</string>
 
     <!-- endregion search screen -->
+
+    <!-- region filter -->
+
+    <string name="filter_order">Order</string>
+    <string name="filter_sort">Sort</string>
+
+    <!-- endregion filter -->
 </resources>

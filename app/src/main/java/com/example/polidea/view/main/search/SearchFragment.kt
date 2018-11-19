@@ -11,6 +11,8 @@ import com.example.polidea.R
 import com.example.polidea.base.view.BaseFragment
 import com.example.polidea.domain.dto.QuestionDto
 import com.example.polidea.view.main.search.adapter.QuestionAdapter
+import com.example.polidea.view.main.search.filter.FilterDialog
+import com.example.polidea.view.main.search.filter.FilterProvider
 import com.example.polidea.view.main.search.presenter.SearchPresenter
 import com.example.polidea.view.main.search.presenter.SearchViewing
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -55,6 +57,8 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 
 	private fun setUpSearchBar() {
 		searchBarSearch.setOnSearchQueryChangedListener { presenter.search(it) }
+		searchBarSearch.setOnFilterClickedListener { presenter.displayFilters() }
+
 	}
 
 	private fun setUpRefresh() {
@@ -88,6 +92,23 @@ class SearchFragment : BaseFragment<SearchViewing, SearchPresenter>(), SearchVie
 
 	override fun hideProgress() {
 		progressSearch.hide()
+	}
+
+	override fun displayFilterDialog(
+		orderValues: List<String>,
+		sortValues: List<String>,
+		order: String,
+		sort: String
+	) {
+		FilterDialog.newInstance(orderValues, sortValues, order, sort, object : FilterProvider {
+			override fun onOrderChanged(order: String) {
+				presenter.setOrder(order)
+			}
+
+			override fun onSortChanged(sort: String) {
+				presenter.setSort(sort)
+			}
+		}).show(fragmentManager, null)
 	}
 
 	//endregion viewing

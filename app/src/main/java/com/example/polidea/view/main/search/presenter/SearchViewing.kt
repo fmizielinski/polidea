@@ -13,4 +13,11 @@ interface SearchViewing : BaseViewing {
 	fun displayProgress()
 
 	fun hideProgress()
+
+	fun displayFilterDialog(
+		orderValues: List<String>,
+		sortValues: List<String>,
+		order: String,
+		sort: String
+	)
 }

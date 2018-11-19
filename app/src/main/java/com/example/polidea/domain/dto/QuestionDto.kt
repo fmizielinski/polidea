@@ -6,6 +6,6 @@ data class QuestionDto(
 	val answerCount: Int,
 	val isAnswered: Boolean,
 	val owner: String,
-	val ownerImageUrl: String,
+	val ownerImageUrl: String?,
 	val link: String
 )

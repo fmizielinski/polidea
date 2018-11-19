@@ -1,4 +1,4 @@
-package com.example.polidea.domain.datasource
+package com.example.polidea.domain.datasource.networking
 
 import com.example.polidea.data.networking.ApiService
 import com.example.polidea.domain.dto.QuestionDto
@@ -10,7 +10,13 @@ class ApiDataSourceImpl(
 	private val questionMapper: QuestionMapper
 ) : ApiDataSource {
 
-	override fun search(page: Int, pageSize: Int, query: String): Single<List<QuestionDto>> =
-		apiService.search(page, pageSize, query)
+	override fun search(
+		page: Int,
+		pageSize: Int,
+		query: String,
+		order: String,
+		sort: String
+	): Single<List<QuestionDto>> =
+		apiService.search(page, pageSize, query, order, sort)
 			.map { questionMapper.map(it.items) }
 }

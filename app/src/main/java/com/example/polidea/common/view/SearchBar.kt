@@ -15,6 +15,7 @@ class SearchBar @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
 	private var onSearchQueryChangedListener: ((String) -> Unit)? = null
+	private var onFilterClickedListener: (() -> Unit)? = null
 
 	init {
 		View.inflate(context, R.layout.view_search_bar, this)
@@ -34,14 +35,19 @@ class SearchBar @JvmOverloads constructor(
 				onSearchQueryChangedListener?.invoke(view.text.toString())
 			true
 		}
-		buttonSearch.setOnClickListener {
+		buttonSearchConfirm.setOnClickListener {
 			if (editTextSearch.text?.isNotEmpty() == true)
 				onSearchQueryChangedListener?.invoke(editTextSearch.text.toString())
 		}
+		buttonSearchFilter.setOnClickListener { onFilterClickedListener?.invoke() }
 
 	}
 
 	fun setOnSearchQueryChangedListener(listener: (String) -> Unit) {
 		onSearchQueryChangedListener = listener
+	}
+
+	fun setOnFilterClickedListener(listener: () -> Unit) {
+		onFilterClickedListener = listener
 	}
 }

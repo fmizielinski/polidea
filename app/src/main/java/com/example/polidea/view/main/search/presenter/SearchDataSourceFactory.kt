@@ -12,16 +12,20 @@ class SearchDataSourceFactory(
 ) : DataSource.Factory<Int, QuestionDto>() {
 
 	private var query: String = ""
+	private var order: String = ""
+	private var sort: String = ""
 
 	private var dataSource: SearchDataSource? = null
 
 	override fun create(): DataSource<Int, QuestionDto> {
-		dataSource = SearchDataSource(searchUseCase, compositeDisposable, query, onErrorListener)
+		dataSource = SearchDataSource(searchUseCase, compositeDisposable, query, order, sort, onErrorListener)
 		return dataSource!!
 	}
 
-	fun search(query: String) {
+	fun search(query: String, order: String, sort: String) {
 		this.query = query
+		this.order = order
+		this.sort = sort
 		dataSource?.invalidate()
 	}
 }

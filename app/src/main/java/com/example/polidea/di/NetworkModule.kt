@@ -1,8 +1,8 @@
 package com.example.polidea.di
 
 import com.example.polidea.data.networking.ApiService
-import com.example.polidea.domain.datasource.ApiDataSource
-import com.example.polidea.domain.datasource.ApiDataSourceImpl
+import com.example.polidea.domain.datasource.networking.ApiDataSource
+import com.example.polidea.domain.datasource.networking.ApiDataSourceImpl
 import com.example.polidea.domain.mapper.QuestionMapper
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
